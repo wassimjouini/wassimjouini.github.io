@@ -484,7 +484,7 @@
     <div class="admin-login">
       <div class="lock">🔒</div>
       <div class="eyebrow" style="justify-content:center; margin-bottom:20px;">Accès réservé au vendeur</div>
-      <div class="field"><label>Identifiant</label><input type="text" id="adminUser" placeholder="admin"></div>
+      <div class="field"><label>Email</label><input type="text" id="adminUser" placeholder="admin@gabarit.tn"></div>
       <div class="field"><label>Mot de passe</label><input type="password" id="adminPass" placeholder="••••••••"></div>
       <button class="btn btn-primary" style="width:100%; max-width:280px; padding:13px;" onclick="tryAdminLogin()">Se connecter</button>
       <div class="err" id="loginErr"></div>
@@ -762,14 +762,13 @@
   }
 
   // ---- vendor / admin side: confirm & validate orders ----
-  const ADMIN_CREDENTIALS = { user:'admin', pass:'Gabarit2026!' };
-  let adminLoggedIn = false;
   let currentTab = 'orders';
 
-  function openAdmin(){
+  async function openAdmin(){
     document.getElementById('adminModal').classList.add('show');
     document.getElementById('adminOverlay').classList.add('show');
-    if(adminLoggedIn){
+    const { data: { session } } = await sb.auth.getSession();
+    if(session){
       showAdminContent();
     } else {
       document.getElementById('adminLogin').style.display = 'block';
@@ -784,21 +783,25 @@
     document.getElementById('adminOverlay').classList.remove('show');
   }
 
-  function tryAdminLogin(){
+  async function tryAdminLogin(){
     const u = document.getElementById('adminUser').value.trim();
     const p = document.getElementById('adminPass').value.trim();
-    if(u === ADMIN_CREDENTIALS.user && p === ADMIN_CREDENTIALS.pass){
-      adminLoggedIn = true;
-      showAdminContent();
-    } else {
+    const loginBtn = document.querySelector('.admin-login .btn-primary');
+    if(loginBtn){ loginBtn.disabled = true; loginBtn.textContent = 'Connexion...'; }
+    const { error } = await sb.auth.signInWithPassword({ email:u, password:p });
+    if(loginBtn){ loginBtn.disabled = false; loginBtn.textContent = 'Se connecter'; }
+    if(error){
       document.getElementById('loginErr').textContent = 'Identifiant ou mot de passe incorrect.';
+    } else {
+      showAdminContent();
     }
   }
 
-  function adminLogout(){
-    adminLoggedIn = false;
+  async function adminLogout(){
+    await sb.auth.signOut();
     closeAdmin();
   }
+
 
   function showAdminContent(){
     document.getElementById('adminLogin').style.display = 'none';
