@@ -212,61 +212,6 @@
 
   footer{border-top:1px solid var(--line); padding:36px 0; color:var(--parchment-dim); font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
 
-  /* ---------- checkout form / success ---------- */
-  .checkout-form{padding:4px 0;}
-  .checkout-form .field{margin-bottom:16px;}
-  .back-link{background:none; border:none; color:var(--brass); font-family:'JetBrains Mono',monospace; font-size:12px; cursor:pointer; margin-bottom:16px; padding:0;}
-  .order-success{text-align:center; padding:30px 0;}
-  .order-success .big-check{width:52px; height:52px; border-radius:50%; border:1.5px solid var(--ok); color:var(--ok); display:grid; place-items:center; margin:0 auto 18px; font-size:24px;}
-  .order-success .order-id{font-family:'JetBrains Mono',monospace; color:var(--brass-light); font-size:20px; margin:10px 0;}
-  .order-success p{color:var(--parchment-dim); font-size:13.5px; margin-bottom:22px;}
-  .status-badge{font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:20px; border:1px solid;}
-  .status-pending{color:var(--brass-light); border-color:var(--brass);}
-  .status-validated{color:var(--ok); border-color:var(--ok);}
-  .status-refused{color:var(--clay); border-color:var(--clay);}
-
-  /* ---------- admin modal ---------- */
-  .admin-modal{
-    position:fixed; inset:0; margin:auto; width:640px; max-width:92vw; max-height:82vh;
-    background:var(--ink-2); border:1px solid var(--brass); border-radius:var(--radius);
-    z-index:120; display:none; flex-direction:column; overflow:hidden;
-  }
-  .admin-modal.show{display:flex;}
-  .admin-head{padding:22px 26px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
-  .admin-head h3{font-size:19px;}
-  .admin-list{overflow-y:auto; padding:10px 26px 26px;}
-  .order-card{border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-top:14px;}
-  .order-card .oc-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
-  .order-card .oc-id{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--brass-light);}
-  .order-card .oc-items{font-size:13px; color:var(--parchment-dim); margin-bottom:10px; line-height:1.7;}
-  .order-card .oc-customer{font-size:12.5px; color:var(--parchment-dim); font-family:'JetBrains Mono',monospace; margin-bottom:12px;}
-  .oc-actions{display:flex; gap:10px;}
-  .oc-actions .btn-mini.refuse{border-color:var(--clay); color:var(--clay);}
-  .oc-actions .btn-mini.refuse:hover{background:var(--clay); color:var(--parchment);}
-  .empty-admin{color:var(--parchment-dim); font-size:14px; text-align:center; padding:50px 0;}
-
-  /* ---------- admin login ---------- */
-  .admin-login{padding:50px 30px; text-align:center;}
-  .admin-login .lock{width:50px; height:50px; border:1.5px solid var(--brass); border-radius:50%; display:grid; place-items:center; margin:0 auto 18px; font-size:20px; color:var(--brass);}
-  .admin-login .field{text-align:left; max-width:280px; margin:0 auto 14px;}
-  .admin-login .err{color:var(--clay); font-size:12.5px; margin-top:10px; min-height:16px;}
-
-  /* ---------- admin tabs ---------- */
-  .admin-tabs{display:flex; gap:8px; padding:14px 26px 0;}
-  .tab-btn{background:none; border:1px solid var(--line); color:var(--parchment-dim); font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; padding:8px 16px; border-radius:20px; cursor:pointer;}
-  .tab-btn.active{border-color:var(--brass); color:var(--brass-light);}
-
-  /* ---------- article management ---------- */
-  .article-row{display:grid; grid-template-columns:1.3fr 1.6fr .8fr auto; gap:10px; align-items:center; border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-top:12px;}
-  .article-row input{padding:9px 10px; font-size:13px;}
-  .article-row .swatch{width:34px; height:34px; border-radius:6px; flex-shrink:0;}
-  .article-name-cell{display:flex; align-items:center; gap:10px;}
-  .del-btn{background:none; border:1px solid var(--line); color:var(--clay); width:32px; height:32px; border-radius:7px; cursor:pointer; font-size:14px;}
-  .del-btn:hover{border-color:var(--clay);}
-  .add-article{border:1px dashed var(--line); border-radius:10px; padding:16px; margin-top:18px;}
-  .add-article-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
-  .add-article select{padding:12px 14px;}
-
   @media (max-width:900px){
     .hero{grid-template-columns:1fr; padding-top:48px;}
     .finder-box{grid-template-columns:1fr;}
@@ -284,7 +229,6 @@
     *{transition:none !important; animation:none !important;}
   }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -296,10 +240,7 @@
       <a href="#trouver">Trouver mon PC</a>
       <a href="#etapes">Comment ça marche</a>
     </nav>
-    <div style="display:flex; gap:10px;">
-      <button class="btn-ghost btn" style="padding:9px 16px; border-radius:30px;" onclick="openAdmin()">Espace vendeur</button>
-      <button class="cart-btn" onclick="toggleCart(true)">Panier <span class="cart-count" id="cartCount">0</span></button>
-    </div>
+    <button class="cart-btn" onclick="toggleCart(true)">Panier <span class="cart-count" id="cartCount">0</span></button>
   </div>
 </header>
 
@@ -437,77 +378,14 @@
     <h3>Votre panier</h3>
     <button class="drawer-close" onclick="toggleCart(false)">✕</button>
   </div>
-  <div class="drawer-items" id="drawerItems">
-
-    <div id="viewCart">
-      <div id="cartList"><div class="empty-cart">Votre panier est vide.</div></div>
-    </div>
-
-    <div id="viewForm" style="display:none;">
-      <button class="back-link" onclick="backToCart()">← retour au panier</button>
-      <div class="checkout-form">
-        <div class="field"><label>Nom complet</label><input type="text" id="custName" placeholder="Wassim Ben ..."></div>
-        <div class="field"><label>Téléphone (WhatsApp)</label><input type="text" id="custPhone" placeholder="+216 XX XXX XXX"></div>
-        <div class="field"><label>Ville</label><input type="text" id="custCity" placeholder="Tunis"></div>
-        <div class="field"><label>Adresse de livraison</label><input type="text" id="custAddress" placeholder="Rue, numéro, code postal"></div>
-      </div>
-    </div>
-
-    <div id="viewSuccess" style="display:none;">
-      <div class="order-success">
-        <div class="big-check">✓</div>
-        <div class="eyebrow" style="justify-content:center;">Commande enregistrée</div>
-        <div class="order-id" id="successOrderId"></div>
-        <p>Votre commande est <b style="color:var(--brass-light)">en attente de validation</b> par le vendeur. Vous recevrez une confirmation sur WhatsApp dès qu'elle sera validée.</p>
-        <button class="btn btn-ghost" style="width:100%;" onclick="resetToCart()">Fermer</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="drawer-foot" id="drawerFoot">
+  <div class="drawer-items" id="drawerItems"><div class="empty-cart">Votre panier est vide.</div></div>
+  <div class="drawer-foot">
     <div class="total-row"><span class="eyebrow" style="margin-bottom:0;">Total</span><span class="amount mono" id="cartTotal">0 TND</span></div>
-    <button class="btn btn-primary" style="width:100%; padding:15px;" id="drawerActionBtn" onclick="goToCheckout()">Commander</button>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="overlay" id="adminOverlay" onclick="closeAdmin()"></div>
-<div class="admin-modal" id="adminModal">
-  <div class="admin-head">
-    <h3 id="adminTitle">Espace vendeur</h3>
-    <button class="drawer-close" onclick="closeAdmin()">✕</button>
-  </div>
-
-  <!-- LOGIN -->
-  <div id="adminLogin">
-    <div class="admin-login">
-      <div class="lock">🔒</div>
-      <div class="eyebrow" style="justify-content:center; margin-bottom:20px;">Accès réservé au vendeur</div>
-      <div class="field"><label>Email</label><input type="text" id="adminUser" placeholder="admin@gabarit.tn"></div>
-      <div class="field"><label>Mot de passe</label><input type="password" id="adminPass" placeholder="••••••••"></div>
-      <button class="btn btn-primary" style="width:100%; max-width:280px; padding:13px;" onclick="tryAdminLogin()">Se connecter</button>
-      <div class="err" id="loginErr"></div>
-    </div>
-  </div>
-
-  <!-- CONTENT (after login) -->
-  <div id="adminContent" style="display:none; flex-direction:column; overflow:hidden; flex:1;">
-    <div class="admin-tabs">
-      <button class="tab-btn active" id="tabOrdersBtn" onclick="switchTab('orders')">Commandes</button>
-      <button class="tab-btn" id="tabArticlesBtn" onclick="switchTab('articles')">Articles &amp; prix</button>
-      <button class="tab-btn" style="margin-left:auto; border-color:var(--clay); color:var(--clay);" onclick="adminLogout()">Déconnexion</button>
-    </div>
-    <div class="admin-list" id="adminList"></div>
-    <div class="admin-list" id="articlesList" style="display:none;"></div>
+    <button class="btn btn-primary" style="width:100%; padding:15px;" onclick="checkout()">Commander</button>
   </div>
 </div>
 
 <script>
-  // ---------- Supabase ----------
-  const SUPABASE_URL = 'https://vuilafzlfukbskefmvxz.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_z-Ljc8SYBkoJZz5-NOsjbA_VgQuG3aV';
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   // ---------- data ----------
   const MODELS = {
     "Lenovo": [
@@ -536,17 +414,14 @@
     ],
   };
 
-  let DESIGNS = [];
-
-  async function loadDesigns(){
-    const { data, error } = await sb.from('articles').select('*').order('created_at', {ascending:true});
-    if(error){ console.error('Erreur chargement articles:', error); return; }
-    DESIGNS = data;
-    renderGallery();
-    if(document.getElementById('articlesList') && document.getElementById('articlesList').style.display !== 'none'){
-      renderArticles();
-    }
-  }
+  const DESIGNS = [
+    {id:'math', name:'Formules Dorées', tag:'Noir & or — équations et constantes', art:'art-math', base:38},
+    {id:'cosmos', name:'Constellation', tag:'Bleu nuit — ciel étoilé minimal', art:'art-cosmos', base:38},
+    {id:'marble', name:'Marbre Doré', tag:'Veinures dorées sur fond sombre', art:'art-marble', base:42},
+    {id:'terrazzo', name:'Terrazzo', tag:'Éclats colorés sur fond ivoire', art:'art-terrazzo', base:36},
+    {id:'line', name:'Ligne Minimale', tag:'Un seul trait, fond parchemin', art:'art-line', base:32},
+    {id:'custom', name:'Votre design', tag:'Envoyez votre propre fichier', art:'art-custom', base:30},
+  ];
 
   let state = { model:null, design:null, qty:1, cart:[] };
 
@@ -586,27 +461,23 @@
   }
 
   // ---------- gallery ----------
-  function renderGallery(){
-    const gallery = document.getElementById('gallery');
-    gallery.innerHTML = '';
-    DESIGNS.forEach(d=>{
-      const card = document.createElement('div');
-      card.className = 'card crop-frame';
-      card.innerHTML = `
-        <span class="cm-tr"></span><span class="cm-bl"></span>
-        <div class="card-art ${d.art}"></div>
-        <div class="card-body">
-          <h3>${d.name}</h3>
-          <p>${d.tag}</p>
-          <div class="card-foot">
-            <span class="price mono">dès ${d.base} TND</span>
-            <button class="btn-mini" onclick="openCustomize('${d.id}')">Personnaliser</button>
-          </div>
-        </div>`;
-      gallery.appendChild(card);
-    });
-  }
-  loadDesigns();
+  const gallery = document.getElementById('gallery');
+  DESIGNS.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'card crop-frame';
+    card.innerHTML = `
+      <span class="cm-tr"></span><span class="cm-bl"></span>
+      <div class="card-art ${d.art}"></div>
+      <div class="card-body">
+        <h3>${d.name}</h3>
+        <p>${d.tag}</p>
+        <div class="card-foot">
+          <span class="price mono">dès ${d.base} TND</span>
+          <button class="btn-mini" onclick="openCustomize('${d.id}')">Personnaliser</button>
+        </div>
+      </div>`;
+    gallery.appendChild(card);
+  });
 
   // ---------- customize ----------
   function computePrice(model, design){
@@ -664,21 +535,15 @@
     toggleCart(true);
   }
 
-  state.orders = [];
-
-  function cartTotalValue(){
-    return state.cart.reduce((s,i)=>s+i.qty*i.unit,0);
-  }
-
   function renderCart(){
-    const list = document.getElementById('cartList');
+    const items = document.getElementById('drawerItems');
     document.getElementById('cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0);
     if(state.cart.length===0){
-      list.innerHTML = '<div class="empty-cart">Votre panier est vide.</div>';
+      items.innerHTML = '<div class="empty-cart">Votre panier est vide.</div>';
       document.getElementById('cartTotal').textContent = '0 TND';
       return;
     }
-    list.innerHTML = state.cart.map((it,i)=>`
+    items.innerHTML = state.cart.map((it,i)=>`
       <div class="cart-item">
         <div class="art-thumb ${it.art}"></div>
         <div class="ci-info">
@@ -687,254 +552,18 @@
           <span>${it.qty} × ${it.unit} TND</span>
         </div>
       </div>`).join('');
-    document.getElementById('cartTotal').textContent = cartTotalValue() + ' TND';
+    const total = state.cart.reduce((s,i)=>s+i.qty*i.unit,0);
+    document.getElementById('cartTotal').textContent = total + ' TND';
   }
 
   function toggleCart(open){
     document.getElementById('drawer').classList.toggle('show', open);
     document.getElementById('overlay').classList.toggle('show', open);
-    if(open) resetToCart();
   }
 
-  // ---- step 1: cart -> step 2: form ----
-  function goToCheckout(){
+  function checkout(){
     if(state.cart.length===0){ return; }
-    document.getElementById('viewCart').style.display = 'none';
-    document.getElementById('viewForm').style.display = 'block';
-    document.getElementById('drawerActionBtn').textContent = 'Valider la commande';
-    document.getElementById('drawerActionBtn').onclick = submitOrder;
-  }
-
-  function backToCart(){
-    document.getElementById('viewForm').style.display = 'none';
-    document.getElementById('viewCart').style.display = 'block';
-    document.getElementById('drawerActionBtn').textContent = 'Commander';
-    document.getElementById('drawerActionBtn').onclick = goToCheckout;
-  }
-
-  // ---- step 2: form -> step 3: success ----
-  async function submitOrder(){
-    const name = document.getElementById('custName').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-    const city = document.getElementById('custCity').value.trim();
-    const address = document.getElementById('custAddress').value.trim();
-    if(!name || !phone || !city || !address){
-      alert('Merci de remplir tous les champs pour valider la commande.');
-      return;
-    }
-
-    const btn = document.getElementById('drawerActionBtn');
-    if(btn){ btn.disabled = true; btn.textContent = 'Envoi...'; }
-
-    const id = 'CMD-' + Date.now().toString(36).toUpperCase();
-    const { error } = await sb.from('orders').insert({
-      id, status:'pending',
-      customer_name:name, customer_phone:phone, customer_city:city, customer_address:address,
-      items:[...state.cart],
-      total: cartTotalValue()
-    });
-
-    if(error){
-      console.error('Erreur envoi commande:', error);
-      alert("La commande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez.");
-      if(btn){ btn.disabled = false; btn.textContent = 'Commander'; }
-      return;
-    }
-
-    // reset cart after order placed
-    state.cart = [];
-    renderCart();
-
-    document.getElementById('viewForm').style.display = 'none';
-    document.getElementById('viewSuccess').style.display = 'block';
-    document.getElementById('successOrderId').textContent = id;
-    document.getElementById('drawerFoot').style.display = 'none';
-    if(btn){ btn.disabled = false; btn.textContent = 'Commander'; }
-  }
-
-  function resetToCart(){
-    document.getElementById('viewSuccess').style.display = 'none';
-    document.getElementById('viewForm').style.display = 'none';
-    document.getElementById('viewCart').style.display = 'block';
-    document.getElementById('drawerFoot').style.display = 'block';
-    document.getElementById('drawerActionBtn').textContent = 'Commander';
-    document.getElementById('drawerActionBtn').onclick = goToCheckout;
-  }
-
-  // ---- vendor / admin side: confirm & validate orders ----
-  let currentTab = 'orders';
-
-  async function openAdmin(){
-    document.getElementById('adminModal').classList.add('show');
-    document.getElementById('adminOverlay').classList.add('show');
-    const { data: { session } } = await sb.auth.getSession();
-    if(session){
-      showAdminContent();
-    } else {
-      document.getElementById('adminLogin').style.display = 'block';
-      document.getElementById('adminContent').style.display = 'none';
-      document.getElementById('adminUser').value = '';
-      document.getElementById('adminPass').value = '';
-      document.getElementById('loginErr').textContent = '';
-    }
-  }
-  function closeAdmin(){
-    document.getElementById('adminModal').classList.remove('show');
-    document.getElementById('adminOverlay').classList.remove('show');
-  }
-
-  async function tryAdminLogin(){
-    const u = document.getElementById('adminUser').value.trim();
-    const p = document.getElementById('adminPass').value.trim();
-    const loginBtn = document.querySelector('.admin-login .btn-primary');
-    if(loginBtn){ loginBtn.disabled = true; loginBtn.textContent = 'Connexion...'; }
-    const { error } = await sb.auth.signInWithPassword({ email:u, password:p });
-    if(loginBtn){ loginBtn.disabled = false; loginBtn.textContent = 'Se connecter'; }
-    if(error){
-      document.getElementById('loginErr').textContent = 'Identifiant ou mot de passe incorrect.';
-    } else {
-      showAdminContent();
-    }
-  }
-
-  async function adminLogout(){
-    await sb.auth.signOut();
-    closeAdmin();
-  }
-
-
-  function showAdminContent(){
-    document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('adminContent').style.display = 'flex';
-    switchTab(currentTab);
-  }
-
-  function switchTab(tab){
-    currentTab = tab;
-    document.getElementById('tabOrdersBtn').classList.toggle('active', tab==='orders');
-    document.getElementById('tabArticlesBtn').classList.toggle('active', tab==='articles');
-    document.getElementById('adminList').style.display = tab==='orders' ? 'block' : 'none';
-    document.getElementById('articlesList').style.display = tab==='articles' ? 'block' : 'none';
-    if(tab==='orders'){ renderAdmin(); } else { renderArticles(); }
-  }
-
-  // ---------- article management ----------
-  const ART_STYLES = ['art-math','art-cosmos','art-marble','art-terrazzo','art-line','art-custom'];
-  const ART_LABELS = {'art-math':'Formules dorées','art-cosmos':'Constellation','art-marble':'Marbre doré','art-terrazzo':'Terrazzo','art-line':'Ligne minimale','art-custom':'Motif personnalisé'};
-
-  function renderArticles(){
-    const list = document.getElementById('articlesList');
-    list.innerHTML = DESIGNS.map((d,i)=>`
-      <div class="article-row">
-        <div class="article-name-cell">
-          <div class="swatch ${d.art}"></div>
-          <input type="text" value="${d.name}" onchange="updateArticle(${i},'name',this.value)">
-        </div>
-        <input type="text" value="${d.tag}" onchange="updateArticle(${i},'tag',this.value)">
-        <input type="number" value="${d.base}" min="1" onchange="updateArticle(${i},'base',this.value)">
-        <button class="del-btn" onclick="deleteArticle(${i})">✕</button>
-      </div>`).join('') + `
-      <div class="add-article">
-        <div class="eyebrow" style="margin-bottom:14px;">Ajouter un article</div>
-        <div class="add-article-grid">
-          <input type="text" id="newArtName" placeholder="Nom du motif">
-          <input type="number" id="newArtPrice" placeholder="Prix de base (TND)">
-        </div>
-        <div class="add-article-grid">
-          <input type="text" id="newArtTag" placeholder="Description courte">
-          <select id="newArtStyle">${ART_STYLES.map(s=>`<option value="${s}">${ART_LABELS[s]}</option>`).join('')}</select>
-        </div>
-        <button class="btn btn-primary" style="width:100%; padding:12px;" onclick="addArticle()">Ajouter au catalogue</button>
-      </div>`;
-  }
-
-  async function updateArticle(i, field, value){
-    if(field==='base'){ value = Math.max(1, Number(value)||1); }
-    DESIGNS[i][field] = value;
-    renderGallery();
-    const { error } = await sb.from('articles').update({ [field]: value }).eq('id', DESIGNS[i].id);
-    if(error){ console.error('Erreur mise à jour article:', error); alert("La modification n'a pas pu être sauvegardée."); }
-  }
-
-  async function deleteArticle(i){
-    if(!confirm(`Supprimer "${DESIGNS[i].name}" du catalogue ?`)) return;
-    const removedId = DESIGNS[i].id;
-    DESIGNS.splice(i,1);
-    renderArticles();
-    renderGallery();
-    const { error } = await sb.from('articles').delete().eq('id', removedId);
-    if(error){ console.error('Erreur suppression article:', error); alert("La suppression n'a pas pu être sauvegardée."); loadDesigns(); }
-  }
-
-  async function addArticle(){
-    const name = document.getElementById('newArtName').value.trim();
-    const tag = document.getElementById('newArtTag').value.trim();
-    const price = Number(document.getElementById('newArtPrice').value) || 30;
-    const art = document.getElementById('newArtStyle').value;
-    if(!name){ alert('Donnez un nom à l\'article.'); return; }
-    const newId = 'd' + Date.now();
-    const { error } = await sb.from('articles').insert({ id:newId, name, tag: tag || '—', art, base: price });
-    if(error){ console.error('Erreur ajout article:', error); alert("L'article n'a pas pu être ajouté."); return; }
-    await loadDesigns();
-    renderArticles();
-  }
-
-  async function renderAdmin(){
-    const list = document.getElementById('adminList');
-    list.innerHTML = '<div class="empty-admin">Chargement…</div>';
-
-    const { data, error } = await sb.from('orders').select('*').order('created_at', {ascending:false});
-    if(error){
-      console.error('Erreur chargement commandes:', error);
-      list.innerHTML = '<div class="empty-admin">Impossible de charger les commandes.</div>';
-      return;
-    }
-    state.orders = data;
-
-    if(state.orders.length===0){
-      list.innerHTML = '<div class="empty-admin">Aucune commande pour le moment.</div>';
-      return;
-    }
-    const statusLabel = {pending:'En attente', validated:'Validée', refused:'Refusée'};
-    const statusClass = {pending:'status-pending', validated:'status-validated', refused:'status-refused'};
-    list.innerHTML = state.orders.map(o=>`
-      <div class="order-card">
-        <div class="oc-top">
-          <span class="oc-id">${o.id}</span>
-          <span class="status-badge ${statusClass[o.status]}">${statusLabel[o.status]}</span>
-        </div>
-        <div class="oc-items">
-          ${o.items.map(it=>`${it.qty} × ${it.design} — ${it.model} (${it.unit} TND)`).join('<br>')}
-          <br><b style="color:var(--brass-light)">Total : ${o.total} TND</b>
-        </div>
-        <div class="oc-customer">
-          ${o.customer_name} · ${o.customer_phone}<br>${o.customer_address}, ${o.customer_city}
-        </div>
-        ${o.status==='pending' ? `
-          <div class="oc-actions">
-            <button class="btn-mini" onclick="setOrderStatus('${o.id}','validated')">Valider</button>
-            <button class="btn-mini refuse" onclick="setOrderStatus('${o.id}','refused')">Refuser</button>
-          </div>` : `
-          <div class="oc-actions">
-            <button class="btn-mini" onclick="sendWhatsapp('${o.id}')">Renvoyer confirmation WhatsApp</button>
-          </div>`}
-      </div>`).join('');
-  }
-
-  async function setOrderStatus(id, status){
-    const { error } = await sb.from('orders').update({ status }).eq('id', id);
-    if(error){ console.error('Erreur mise à jour commande:', error); alert("Le statut n'a pas pu être mis à jour."); return; }
-    await renderAdmin();
-    if(status==='validated'){ sendWhatsapp(id); }
-  }
-
-  function sendWhatsapp(id){
-    const order = state.orders.find(o=>o.id===id);
-    if(!order) return;
-    const phone = order.customer_phone.replace(/[^0-9]/g,'');
-    const itemsText = order.items.map(it=>`${it.qty}x ${it.design} (${it.model})`).join(', ');
-    const msg = `Bonjour ${order.customer_name}, votre commande ${order.id} chez GABARIT est validée ✅%0A${itemsText}%0ATotal : ${order.total} TND%0ALivraison à : ${order.customer_address}, ${order.customer_city}%0AMerci pour votre confiance !`;
-    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    alert("Commande simulée — dans une vraie boutique, ceci ouvrirait le paiement / la prise de coordonnées de livraison.");
   }
 </script>
 
