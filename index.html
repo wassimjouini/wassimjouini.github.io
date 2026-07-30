@@ -845,49 +845,32 @@
       </div>`;
   }
 
-  async function updateArticle(i, field, value){
+  function updateArticle(i, field, value){
     if(field==='base'){ value = Math.max(1, Number(value)||1); }
     DESIGNS[i][field] = value;
     renderGallery();
-    const { error } = await sb.from('articles').update({ [field]: value }).eq('id', DESIGNS[i].id);
-    if(error){ console.error('Erreur mise à jour article:', error); alert("La modification n'a pas pu être sauvegardée."); }
   }
 
-  async function deleteArticle(i){
+  function deleteArticle(i){
     if(!confirm(`Supprimer "${DESIGNS[i].name}" du catalogue ?`)) return;
-    const removedId = DESIGNS[i].id;
     DESIGNS.splice(i,1);
     renderArticles();
     renderGallery();
-    const { error } = await sb.from('articles').delete().eq('id', removedId);
-    if(error){ console.error('Erreur suppression article:', error); alert("La suppression n'a pas pu être sauvegardée."); loadDesigns(); }
   }
 
-  async function addArticle(){
+  function addArticle(){
     const name = document.getElementById('newArtName').value.trim();
     const tag = document.getElementById('newArtTag').value.trim();
     const price = Number(document.getElementById('newArtPrice').value) || 30;
     const art = document.getElementById('newArtStyle').value;
     if(!name){ alert('Donnez un nom à l\'article.'); return; }
-    const newId = 'd' + Date.now();
-    const { error } = await sb.from('articles').insert({ id:newId, name, tag: tag || '—', art, base: price });
-    if(error){ console.error('Erreur ajout article:', error); alert("L'article n'a pas pu être ajouté."); return; }
-    await loadDesigns();
+    DESIGNS.push({ id:'d'+Date.now(), name, tag: tag || '—', art, base: price });
     renderArticles();
+    renderGallery();
   }
 
-  async function renderAdmin(){
+  function renderAdmin(){
     const list = document.getElementById('adminList');
-    list.innerHTML = '<div class="empty-admin">Chargement…</div>';
-
-    const { data, error } = await sb.from('orders').select('*').order('created_at', {ascending:false});
-    if(error){
-      console.error('Erreur chargement commandes:', error);
-      list.innerHTML = '<div class="empty-admin">Impossible de charger les commandes.</div>';
-      return;
-    }
-    state.orders = data;
-
     if(state.orders.length===0){
       list.innerHTML = '<div class="empty-admin">Aucune commande pour le moment.</div>';
       return;
@@ -905,7 +888,7 @@
           <br><b style="color:var(--brass-light)">Total : ${o.total} TND</b>
         </div>
         <div class="oc-customer">
-          ${o.customer_name} · ${o.customer_phone}<br>${o.customer_address}, ${o.customer_city}
+          ${o.customer.name} · ${o.customer.phone}<br>${o.customer.address}, ${o.customer.city}
         </div>
         ${o.status==='pending' ? `
           <div class="oc-actions">
@@ -918,19 +901,20 @@
       </div>`).join('');
   }
 
-  async function setOrderStatus(id, status){
-    const { error } = await sb.from('orders').update({ status }).eq('id', id);
-    if(error){ console.error('Erreur mise à jour commande:', error); alert("Le statut n'a pas pu être mis à jour."); return; }
-    await renderAdmin();
+  function setOrderStatus(id, status){
+    const order = state.orders.find(o=>o.id===id);
+    if(!order) return;
+    order.status = status;
+    renderAdmin();
     if(status==='validated'){ sendWhatsapp(id); }
   }
 
   function sendWhatsapp(id){
     const order = state.orders.find(o=>o.id===id);
     if(!order) return;
-    const phone = order.customer_phone.replace(/[^0-9]/g,'');
+    const phone = order.customer.phone.replace(/[^0-9]/g,'');
     const itemsText = order.items.map(it=>`${it.qty}x ${it.design} (${it.model})`).join(', ');
-    const msg = `Bonjour ${order.customer_name}, votre commande ${order.id} chez GABARIT est validée ✅%0A${itemsText}%0ATotal : ${order.total} TND%0ALivraison à : ${order.customer_address}, ${order.customer_city}%0AMerci pour votre confiance !`;
+    const msg = `Bonjour ${order.customer.name}, votre commande ${order.id} chez GABARIT est validée ✅%0A${itemsText}%0ATotal : ${order.total} TND%0ALivraison à : ${order.customer.address}, ${order.customer.city}%0AMerci pour votre confiance !`;
     window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
   }
 </script>
