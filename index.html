@@ -188,7 +188,7 @@
   .total-row .amount{font-family:'Fraunces',serif; font-size:30px; color:var(--brass-light);}
 
   /* ---------- how it works ---------- */
-  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
   .step{padding:22px; border:1px solid var(--line); border-radius:10px;}
   .step .num{font-family:'JetBrains Mono',monospace; color:var(--brass); font-size:12px; margin-bottom:10px;}
   .step h4{font-size:16px; margin-bottom:8px; font-family:'Fraunces',serif; font-weight:500;}
@@ -297,8 +297,7 @@
   <div class="nav">
     <div class="logo"><span class="mark"></span>GABARIT</div>
     <nav class="navlinks">
-      <a href="#modeles">Modèles</a>
-      <a href="#trouver">Trouver mon PC</a>
+      <a href="#modeles">Motifs</a>
       <a href="#etapes">Comment ça marche</a>
     </nav>
     <div style="display:flex; gap:10px;">
@@ -312,12 +311,11 @@
   <!-- HERO -->
   <section class="hero">
     <div>
-      <div class="eyebrow">Skins vinyle · coupe laser au mm</div>
-      <h1>Des stickers coupés <em>au millimètre</em><br>de votre ordinateur.</h1>
-      <p>Choisissez votre modèle de PC, on récupère ses dimensions exactes. Choisissez un motif — ou envoyez le vôtre. On imprime et découpe sur-mesure, sans marge ratée.</p>
+      <div class="eyebrow">Stickers vinyle · impression & découpe</div>
+      <h1>Des stickers <em>prêts à coller</em><br>sur PC, téléphone, partout.</h1>
+      <p>Choisissez un motif dans notre catalogue — ou envoyez le vôtre. On imprime et on découpe, vous n'avez plus qu'à coller.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" onclick="document.getElementById('trouver').scrollIntoView({behavior:'smooth'})">Trouver mon PC</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('modeles').scrollIntoView({behavior:'smooth'})">Voir les modèles</button>
+        <button class="btn btn-primary" onclick="document.getElementById('modeles').scrollIntoView({behavior:'smooth'})">Voir les motifs</button>
       </div>
     </div>
     <div class="blueprint crop-frame">
@@ -328,57 +326,17 @@
         <line x1="70" y1="222" x2="330" y2="222" stroke="#c6a15b" stroke-width="1"/>
         <line x1="70" y1="217" x2="70" y2="227" stroke="#c6a15b" stroke-width="1"/>
         <line x1="330" y1="217" x2="330" y2="227" stroke="#c6a15b" stroke-width="1"/>
-        <text x="200" y="240" fill="#c6a15b" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle">largeur — mm exacts</text>
-        <line x1="46" y1="30" x2="46" y2="210" stroke="#c6a15b" stroke-width="1"/>
-        <line x1="41" y1="30" x2="51" y2="30" stroke="#c6a15b" stroke-width="1"/>
-        <line x1="41" y1="210" x2="51" y2="210" stroke="#c6a15b" stroke-width="1"/>
-        <text x="30" y="120" fill="#c6a15b" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle" transform="rotate(-90 30 120)">hauteur</text>
+        <text x="200" y="240" fill="#c6a15b" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle">découpe nette</text>
       </svg>
-    </div>
-  </section>
-
-  <!-- FINDER -->
-  <section id="trouver">
-    <div class="section-head">
-      <div class="eyebrow">Étape 1</div>
-      <h2>Trouvez votre ordinateur</h2>
-      <p>Marque et modèle — on remplit automatiquement les dimensions du capot pour une découpe exacte.</p>
-    </div>
-    <div class="finder-box crop-frame">
-      <span class="cm-tr"></span><span class="cm-bl"></span>
-      <div class="field">
-        <label>Marque</label>
-        <select id="brandSelect" onchange="fillModels()">
-          <option value="">— choisir —</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Modèle</label>
-        <select id="modelSelect" onchange="showModel()">
-          <option value="">— choisir la marque d'abord —</option>
-        </select>
-      </div>
-      <button class="btn btn-primary" style="height:47px;" onclick="showModel()">Valider</button>
-    </div>
-    <p style="font-size:12px; color:var(--parchment-dim); margin-top:10px;">Votre modèle n'est pas dans la liste ? Choisissez « Autre / Non listé » et précisez la référence exacte dans les notes de commande, ou contactez-nous.</p>
-
-    <div class="model-result crop-frame" id="modelResult">
-      <span class="cm-tr"></span><span class="cm-bl"></span>
-      <div class="mini-lid" id="miniLid"></div>
-      <div>
-        <div class="eyebrow" style="margin-bottom:6px;">PC sélectionné</div>
-        <div id="modelName" style="font-family:'Fraunces',serif; font-size:19px;"></div>
-        <div class="dims" id="modelDims"></div>
-      </div>
     </div>
   </section>
 
   <!-- GALLERY -->
   <section id="modeles">
     <div class="section-head">
-      <div class="eyebrow">Étape 2</div>
+      <div class="eyebrow">Étape 1</div>
       <h2>Choisissez un motif</h2>
-      <p>Chaque modèle est redimensionné automatiquement à la taille exacte du PC choisi ci-dessus.</p>
+      <p>Un sticker vinyle, prêt à coller sur ordinateur, téléphone, ou toute autre surface lisse.</p>
     </div>
     <div class="gallery" id="gallery"></div>
   </section>
@@ -386,17 +344,20 @@
   <!-- CUSTOMIZE -->
   <div class="customize" id="customize">
     <div class="cz-preview">
-      <div class="cz-lid" id="czLid">
-        <div class="cz-dim w" id="czDimW"></div>
-        <div class="cz-dim h" id="czDimH"></div>
-      </div>
+      <div class="cz-lid" id="czLid" style="width:220px; aspect-ratio:1/1;"></div>
     </div>
     <div class="cz-info">
-      <div class="eyebrow">Aperçu sur-mesure</div>
+      <div class="eyebrow">Aperçu</div>
       <h3 id="czName"></h3>
       <div class="sub" id="czSub"></div>
-      <div class="row"><span>PC</span><span id="czPc" class="mono"></span></div>
-      <div class="row"><span>Découpe</span><span class="mono">Vinyle mat, laminé anti-rayures</span></div>
+      <div class="row"><span>Support</span>
+        <select id="czSupport" class="mono" style="width:auto; padding:8px 10px;">
+          <option value="Ordinateur portable">Ordinateur portable</option>
+          <option value="Téléphone">Téléphone</option>
+          <option value="Autre support">Autre support</option>
+        </select>
+      </div>
+      <div class="row"><span>Finition</span><span class="mono">Vinyle mat, laminé anti-rayures</span></div>
       <div class="row"><span>Quantité</span>
         <div class="qty">
           <button onclick="changeQty(-1)">–</button>
@@ -419,10 +380,9 @@
       <h2>Du choix à la livraison</h2>
     </div>
     <div class="steps">
-      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">01</div><h4>PC identifié</h4><p>Vous choisissez la marque et le modèle exact, on récupère les cotes du capot.</p></div>
-      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">02</div><h4>Motif choisi</h4><p>Un motif du catalogue, ou votre propre design envoyé en haute résolution.</p></div>
-      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">03</div><h4>Découpe laser</h4><p>Impression et découpe vinyle au mm près, avec marge de sécurité calculée.</p></div>
-      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">04</div><h4>Livraison</h4><p>Expédié partout en Tunisie, posé en 2 minutes, sans bulles d'air.</p></div>
+      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">01</div><h4>Motif choisi</h4><p>Un motif du catalogue, ou votre propre design envoyé en haute résolution.</p></div>
+      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">02</div><h4>Impression & découpe</h4><p>Impression et découpe vinyle, avec une finition mate anti-rayures.</p></div>
+      <div class="step crop-frame"><span class="cm-tr"></span><span class="cm-bl"></span><div class="num">03</div><h4>Livraison</h4><p>Expédié partout en Tunisie, prêt à coller en quelques secondes.</p></div>
     </div>
   </section>
 
@@ -430,7 +390,7 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
-    <span>GABARIT — skins d'ordinateur sur mesure, Tunis.</span>
+    <span>GABARIT — stickers vinyle sur mesure, Tunis.</span>
     <span class="mono">Vinyle mat / brillant · laminé anti-rayures</span>
   </div>
 </footer>
@@ -463,7 +423,7 @@
         <div class="big-check">✓</div>
         <div class="eyebrow" style="justify-content:center;">Commande enregistrée</div>
         <div class="order-id" id="successOrderId"></div>
-        <p>Votre commande est <b style="color:var(--brass-light)">en attente de validation</b> par le vendeur. Vous recevrez une confirmation sur WhatsApp dès qu'elle sera validée.</p>
+        <p>Votre commande est <b style="color:var(--brass-light)">en attente de validation</b> par le vendeur (livraison de 7 TND incluse dans le total). Vous recevrez une confirmation sur WhatsApp dès qu'elle sera validée.</p>
         <button class="btn btn-ghost" style="width:100%;" onclick="resetToCart()">Fermer</button>
       </div>
     </div>
@@ -471,6 +431,8 @@
   </div>
 
   <div class="drawer-foot" id="drawerFoot">
+    <div class="row" id="rowSubtotal" style="border-bottom:none; padding-bottom:4px;"><span>Sous-total</span><span class="mono" id="cartSubtotal">0 TND</span></div>
+    <div class="row" id="rowDelivery" style="border-bottom:none; padding-top:0; padding-bottom:8px;"><span>Livraison</span><span class="mono" id="cartDelivery">0 TND</span></div>
     <div class="total-row"><span class="eyebrow" style="margin-bottom:0;">Total</span><span class="amount mono" id="cartTotal">0 TND</span></div>
     <button class="btn btn-primary" style="width:100%; padding:15px;" id="drawerActionBtn" onclick="goToCheckout()">Commander</button>
   </div>
@@ -481,115 +443,9 @@
   const SUPABASE_URL = 'https://vuilafzlfukbskefmvxz.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_z-Ljc8SYBkoJZz5-NOsjbA_VgQuG3aV';
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  // ---------- data ----------
-  const MODELS = {
-    "Lenovo": [
-      {name:"IdeaPad Slim 3 15IRH8", w:359.3, h:235},
-      {name:"IdeaPad Slim 3 15IRH10", w:359.3, h:235},
-      {name:"IdeaPad Slim 5 14IRL8", w:318.7, h:220.6},
-      {name:"IdeaPad 3 14IAU7", w:322.7, h:212},
-      {name:"IdeaPad 3 15IAU7", w:359.5, h:236.4},
-      {name:"ThinkPad E14 Gen 5", w:323.5, h:213},
-      {name:"ThinkPad T14 Gen 4", w:323.5, h:224.4},
-      {name:"ThinkPad X1 Carbon Gen 11", w:315.6, h:222.5},
-      {name:"Legion 5 15", w:359.9, h:261.4},
-      {name:"Yoga Slim 7 14", w:319.2, h:221.1},
-      {name:"Yoga 7 2-in-1 14", w:318.4, h:222.5},
-    ],
-    "Apple": [
-      {name:"MacBook Air 13\" M1/M2", w:304.1, h:215},
-      {name:"MacBook Air 13\" M3/M4", w:304.1, h:215},
-      {name:"MacBook Air 15\"", w:340.4, h:237.6},
-      {name:"MacBook Pro 13\" (Touch Bar)", w:304.1, h:212.4},
-      {name:"MacBook Pro 14\"", w:312.6, h:221.2},
-      {name:"MacBook Pro 16\"", w:355.7, h:248.1},
-    ],
-    "Dell": [
-      {name:"XPS 13 9320/9340", w:295.7, h:207.5},
-      {name:"XPS 13 Plus 9320", w:295.3, h:199.04},
-      {name:"XPS 15 9530", w:344.4, h:230.1},
-      {name:"XPS 17 9730", w:374.45, h:248.1},
-      {name:"Inspiron 14 5430", w:322, h:216.4},
-      {name:"Inspiron 15 3520", w:358.5, h:235.5},
-      {name:"Inspiron 15 5510", w:357.5, h:235.03},
-      {name:"Latitude 5440", w:323.68, h:216.4},
-      {name:"Vostro 15 3520", w:358.5, h:235.5},
-      {name:"G15 5530 (gaming)", w:359.5, h:264.7},
-    ],
-    "HP": [
-      {name:"Pavilion 15", w:358.7, h:235.2},
-      {name:"Pavilion 14", w:322.5, h:220.8},
-      {name:"Envy 13/14", w:311.5, h:220.5},
-      {name:"EliteBook 840 G9/G10", w:323.5, h:214.5},
-      {name:"ProBook 450 G9/G10", w:358.1, h:235.1},
-      {name:"Victus 15 (gaming)", w:359.8, h:253.5},
-      {name:"Omen 16 (gaming)", w:357.6, h:263.1},
-      {name:"Spectre x360 14", w:311.7, h:220.4},
-    ],
-    "Asus": [
-      {name:"Vivobook 15 X1504/X1502", w:358.3, h:235.5},
-      {name:"Vivobook 14 X1404", w:322.6, h:214.9},
-      {name:"Vivobook S 15", w:354.5, h:233.9},
-      {name:"ZenBook 14 UX3402", w:311.9, h:220.5},
-      {name:"ZenBook 14 OLED UX3405", w:311, h:220},
-      {name:"TUF Gaming A15", w:359.8, h:256},
-      {name:"ROG Strix G16 (gaming)", w:354.9, h:264.6},
-      {name:"ROG Zephyrus G14", w:312, h:227},
-    ],
-    "Acer": [
-      {name:"Aspire 3 A315", w:363.1, h:239.6},
-      {name:"Aspire 5 A515", w:363.5, h:240.4},
-      {name:"Swift 3 SF314", w:317.9, h:225.6},
-      {name:"Swift Go 14", w:318.1, h:222.9},
-      {name:"Nitro 5 (gaming)", w:363.4, h:255.1},
-      {name:"Predator Helios Neo 16", w:355.6, h:259.5},
-    ],
-    "MSI": [
-      {name:"Modern 14", w:322.9, h:223.5},
-      {name:"Modern 15", w:357.9, h:235.9},
-      {name:"Katana 15 (gaming)", w:358.6, h:263.5},
-      {name:"Stealth 14 (gaming)", w:311.8, h:227.3},
-      {name:"Cyborg 15 (gaming)", w:359.5, h:254.5},
-    ],
-    "Samsung": [
-      {name:"Galaxy Book4 15\"", w:355.4, h:225.8},
-      {name:"Galaxy Book4 Pro 14\"", w:311.6, h:222.6},
-      {name:"Galaxy Book3 15\"", w:355.4, h:225.8},
-    ],
-    "Microsoft": [
-      {name:"Surface Laptop 5 13.5\"", w:308, h:223},
-      {name:"Surface Laptop 5 15\"", w:339.5, h:244},
-      {name:"Surface Laptop Go 3", w:278, h:206},
-      {name:"Surface Book 3 15\"", w:343, h:251},
-    ],
-    "LG": [
-      {name:"Gram 14 (2023)", w:312.7, h:213.9},
-      {name:"Gram 16 (2023)", w:356, h:246.9},
-      {name:"Gram 17 (2023)", w:380.3, h:260.2},
-    ],
-    "Huawei": [
-      {name:"MateBook D14", w:322.5, h:214.8},
-      {name:"MateBook D15", w:357.6, h:229.9},
-      {name:"MateBook X Pro", w:304, h:217},
-    ],
-    "Toshiba / Dynabook": [
-      {name:"Satellite Pro C50", w:378, h:257.4},
-      {name:"Tecra A50", w:376, h:255.4},
-    ],
-    "Razer": [
-      {name:"Blade 14 (gaming)", w:312.9, h:220.3},
-      {name:"Blade 15 (gaming)", w:355, h:235},
-    ],
-    "Gigabyte / Aorus": [
-      {name:"Aorus 15 (gaming)", w:359.9, h:262.6},
-      {name:"Aero 16 (créateur)", w:356.8, h:249.5},
-    ],
-    "Autre / Non listé": [
-      {name:"Modèle personnalisé (précisez dans la commande)", w:340, h:230},
-    ],
-  };
 
   let DESIGNS = [];
+  const DELIVERY_FEE = 7;
 
   async function loadDesigns(){
     const { data, error } = await sb.from('articles').select('*').order('created_at', {ascending:true});
@@ -598,42 +454,7 @@
     renderGallery();
   }
 
-  let state = { model:null, design:null, qty:1, cart:[] };
-
-  // ---------- finder ----------
-  const brandSelect = document.getElementById('brandSelect');
-  Object.keys(MODELS).forEach(b=>{
-    const o = document.createElement('option'); o.value=b; o.textContent=b;
-    brandSelect.appendChild(o);
-  });
-
-  function fillModels(){
-    const modelSelect = document.getElementById('modelSelect');
-    modelSelect.innerHTML = '';
-    const brand = brandSelect.value;
-    if(!brand){ modelSelect.innerHTML = '<option value="">— choisir la marque d\'abord —</option>'; return; }
-    const opt0 = document.createElement('option'); opt0.value=''; opt0.textContent='— choisir —';
-    modelSelect.appendChild(opt0);
-    MODELS[brand].forEach((m,i)=>{
-      const o = document.createElement('option'); o.value=i; o.textContent = m.name;
-      modelSelect.appendChild(o);
-    });
-  }
-
-  function showModel(){
-    const brand = brandSelect.value;
-    const idx = document.getElementById('modelSelect').value;
-    if(!brand || idx===''){ return; }
-    const m = MODELS[brand][idx];
-    state.model = {brand, ...m};
-    const box = document.getElementById('modelResult');
-    box.classList.add('show');
-    document.getElementById('modelName').textContent = brand + ' ' + m.name;
-    document.getElementById('modelDims').innerHTML =
-      `<span>${m.w} × ${m.h} mm</span><span>${(m.w/10).toFixed(1)} × ${(m.h/10).toFixed(1)} cm</span><span>ratio ${(m.w/m.h).toFixed(2)}</span>`;
-    document.getElementById('miniLid').style.aspectRatio = `${m.w} / ${m.h}`;
-    box.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
+  let state = { design:null, qty:1, cart:[] };
 
   // ---------- gallery ----------
   function renderGallery(){
@@ -661,32 +482,21 @@
   loadDesigns();
 
   // ---------- customize ----------
-  function computePrice(model, design){
-    const areaCm2 = (model.w/10) * (model.h/10);
-    let price = design.base + Math.max(0, (areaCm2 - 700) * 0.045);
-    return Math.round(price);
+  function computePrice(design){
+    return design.base;
   }
 
   function openCustomize(designId){
-    if(!state.model){
-      alert("Choisissez d'abord votre PC dans « Trouver mon PC » ci-dessus.");
-      document.getElementById('trouver').scrollIntoView({behavior:'smooth'});
-      return;
-    }
     state.design = DESIGNS.find(d=>d.id===designId);
     state.qty = 1;
     const panel = document.getElementById('customize');
     panel.classList.add('show');
     document.getElementById('czName').textContent = state.design.name;
     document.getElementById('czSub').textContent = state.design.tag;
-    document.getElementById('czPc').textContent = state.model.brand + ' ' + state.model.name;
+    document.getElementById('czSupport').value = 'Ordinateur portable';
     const lid = document.getElementById('czLid');
     lid.className = 'cz-lid ' + (state.design.image ? 'has-photo' : state.design.art);
     lid.style.backgroundImage = state.design.image ? `url('${state.design.image}')` : '';
-    lid.style.width = '280px';
-    lid.style.aspectRatio = `${state.model.w} / ${state.model.h}`;
-    document.getElementById('czDimW').textContent = state.model.w + ' mm';
-    document.getElementById('czDimH').textContent = state.model.h + ' mm';
     document.getElementById('qtyVal').textContent = state.qty;
     updateTotal();
     panel.scrollIntoView({behavior:'smooth', block:'center'});
@@ -699,15 +509,15 @@
   }
 
   function updateTotal(){
-    const unit = computePrice(state.model, state.design);
+    const unit = computePrice(state.design);
     document.getElementById('czTotal').textContent = (unit * state.qty) + ' TND';
   }
 
   // ---------- cart ----------
   function addToCart(){
-    const unit = computePrice(state.model, state.design);
+    const unit = computePrice(state.design);
     state.cart.push({
-      model: state.model.brand + ' ' + state.model.name,
+      support: document.getElementById('czSupport').value,
       design: state.design.name,
       art: state.design.art,
       image: state.design.image || null,
@@ -717,6 +527,7 @@
     renderCart();
     toggleCart(true);
   }
+
 
   state.orders = [];
 
@@ -729,6 +540,8 @@
     document.getElementById('cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0);
     if(state.cart.length===0){
       list.innerHTML = '<div class="empty-cart">Votre panier est vide.</div>';
+      document.getElementById('cartSubtotal').textContent = '0 TND';
+      document.getElementById('cartDelivery').textContent = '0 TND';
       document.getElementById('cartTotal').textContent = '0 TND';
       return;
     }
@@ -737,11 +550,17 @@
         <div class="art-thumb ${it.image ? 'has-photo' : it.art}" ${it.image ? `style="background-image:url('${it.image}')"` : ''}></div>
         <div class="ci-info">
           <b>${it.design}</b>
-          <span>${it.model}</span><br>
+          <span>${it.support}</span><br>
           <span>${it.qty} × ${it.unit} TND</span>
         </div>
       </div>`).join('');
-    document.getElementById('cartTotal').textContent = cartTotalValue() + ' TND';
+    document.getElementById('cartSubtotal').textContent = cartTotalValue() + ' TND';
+    document.getElementById('cartDelivery').textContent = DELIVERY_FEE + ' TND';
+    document.getElementById('cartTotal').textContent = orderTotalValue() + ' TND';
+  }
+
+  function orderTotalValue(){
+    return state.cart.length ? cartTotalValue() + DELIVERY_FEE : 0;
   }
 
   function toggleCart(open){
@@ -785,7 +604,7 @@
       id, status:'pending',
       customer_name:name, customer_phone:phone, customer_city:city, customer_address:address,
       items:[...state.cart],
-      total: cartTotalValue()
+      total: orderTotalValue()
     });
 
     if(error){
