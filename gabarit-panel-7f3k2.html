@@ -64,7 +64,8 @@
     padding:10px 12px; border-radius:7px; font-family:'Inter',sans-serif; font-size:14px;
   }
   .prod-list .row{display:flex; align-items:center; gap:16px;}
-  .swatch{width:44px; height:32px; border-radius:5px; flex-shrink:0; border:1px solid var(--line);}
+  .swatch{width:44px; height:32px; border-radius:5px; flex-shrink:0; border:1px solid var(--line); overflow:hidden; background-size:cover; background-position:center;}
+  .swatch img{width:100%; height:100%; object-fit:cover; display:block;}
   .prod-info{flex:1;}
   .prod-info b{display:block; font-size:14.5px;}
   .prod-info span{color:var(--parchment-dim); font-size:12.5px;}
@@ -134,7 +135,7 @@
           <input type="text" id="pTag" placeholder="Ex: Noir & or — équations et constantes">
         </div>
         <div>
-          <label>Style visuel</label>
+          <label>Style visuel (si pas de photo)</label>
           <select id="pArt">
             <option value="art-math">Formules (noir/or)</option>
             <option value="art-cosmos">Constellation (bleu nuit)</option>
@@ -143,6 +144,14 @@
             <option value="art-line">Ligne minimale</option>
             <option value="art-custom">Design personnalisé client</option>
           </select>
+        </div>
+        <div>
+          <label>Photo du motif (URL)</label>
+          <input type="text" id="pImage" placeholder="https://..." oninput="previewImage()">
+        </div>
+        <div class="full" id="pImagePreviewWrap" style="display:none;">
+          <label>Aperçu</label>
+          <div class="swatch" id="pImagePreview" style="width:80px; height:56px;"></div>
         </div>
         <div class="full">
           <button class="action" onclick="addProduct()">+ Ajouter ce motif</button>
@@ -256,7 +265,7 @@
     if(!data.length){ box.innerHTML = '<p class="empty">Aucun produit. Ajoutez-en un ci-dessus.</p>'; return; }
     box.innerHTML = data.map(p=>`
       <div class="card row">
-        <div class="swatch ${p.art}"></div>
+        <div class="swatch ${p.image ? '' : (p.art||'')}">${p.image ? `<img src="${p.image}" alt="${p.name}">` : ''}</div>
         <div class="prod-info">
           <b>${p.name}</b>
           <span>${p.tag} · dès ${p.base} TND</span>
@@ -265,17 +274,29 @@
       </div>`).join('');
   }
 
+  function previewImage(){
+    const url = document.getElementById('pImage').value.trim();
+    const wrap = document.getElementById('pImagePreviewWrap');
+    const box = document.getElementById('pImagePreview');
+    if(!url){ wrap.style.display='none'; box.innerHTML=''; return; }
+    wrap.style.display='block';
+    box.innerHTML = `<img src="${url}" alt="aperçu" onerror="this.style.display='none'">`;
+  }
+
   async function addProduct(){
     const name = document.getElementById('pName').value.trim();
     const tag = document.getElementById('pTag').value.trim();
     const base = parseFloat(document.getElementById('pBase').value);
     const art = document.getElementById('pArt').value;
+    const image = document.getElementById('pImage').value.trim();
     if(!name || !tag || isNaN(base)){ alert('Merci de remplir tous les champs.'); return; }
-    const { error } = await sb.from('articles').insert({ id:'d'+Date.now(), name, tag, base, art });
-    if(error){ alert("Le produit n'a pas pu être ajouté."); console.error(error); return; }
+    const { error } = await sb.from('articles').insert({ id:'d'+Date.now(), name, tag, base, art, image: image || null });
+    if(error){ alert("Le produit n'a pas pu être ajouté. Vérifiez qu'une colonne 'image' (type text) existe bien dans la table 'articles' sur Supabase."); console.error(error); return; }
     document.getElementById('pName').value='';
     document.getElementById('pTag').value='';
     document.getElementById('pBase').value='';
+    document.getElementById('pImage').value='';
+    document.getElementById('pImagePreviewWrap').style.display='none';
     await loadProducts();
   }
 

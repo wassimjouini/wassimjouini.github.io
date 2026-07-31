@@ -162,6 +162,11 @@
   .art-custom{background:repeating-linear-gradient(45deg, rgba(198,161,91,.14) 0 2px, transparent 2px 14px), var(--ink-2); display:grid; place-items:center;}
   .art-custom::after{content:'+ VOTRE DESIGN'; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; color:var(--brass);}
 
+  /* photo réelle du motif (prioritaire sur le motif CSS) */
+  .has-photo{background-size:cover !important; background-position:center !important;}
+  .has-photo::after{content:none !important;}
+  .cz-lid.has-photo{background-size:cover; background-position:center;}
+
   /* ---------- customize panel ---------- */
   .customize{
     display:none; background:var(--ink-2); border:1px solid var(--brass); border-radius:var(--radius);
@@ -355,6 +360,7 @@
       </div>
       <button class="btn btn-primary" style="height:47px;" onclick="showModel()">Valider</button>
     </div>
+    <p style="font-size:12px; color:var(--parchment-dim); margin-top:10px;">Votre modèle n'est pas dans la liste ? Choisissez « Autre / Non listé » et précisez la référence exacte dans les notes de commande, ou contactez-nous.</p>
 
     <div class="model-result crop-frame" id="modelResult">
       <span class="cm-tr"></span><span class="cm-bl"></span>
@@ -480,26 +486,106 @@
     "Lenovo": [
       {name:"IdeaPad Slim 3 15IRH8", w:359.3, h:235},
       {name:"IdeaPad Slim 3 15IRH10", w:359.3, h:235},
+      {name:"IdeaPad Slim 5 14IRL8", w:318.7, h:220.6},
       {name:"IdeaPad 3 14IAU7", w:322.7, h:212},
+      {name:"IdeaPad 3 15IAU7", w:359.5, h:236.4},
       {name:"ThinkPad E14 Gen 5", w:323.5, h:213},
+      {name:"ThinkPad T14 Gen 4", w:323.5, h:224.4},
+      {name:"ThinkPad X1 Carbon Gen 11", w:315.6, h:222.5},
+      {name:"Legion 5 15", w:359.9, h:261.4},
+      {name:"Yoga Slim 7 14", w:319.2, h:221.1},
+      {name:"Yoga 7 2-in-1 14", w:318.4, h:222.5},
     ],
     "Apple": [
-      {name:"MacBook Air 13\" M2", w:304.1, h:215},
+      {name:"MacBook Air 13\" M1/M2", w:304.1, h:215},
+      {name:"MacBook Air 13\" M3/M4", w:304.1, h:215},
+      {name:"MacBook Air 15\"", w:340.4, h:237.6},
+      {name:"MacBook Pro 13\" (Touch Bar)", w:304.1, h:212.4},
       {name:"MacBook Pro 14\"", w:312.6, h:221.2},
       {name:"MacBook Pro 16\"", w:355.7, h:248.1},
     ],
     "Dell": [
-      {name:"XPS 13 9320", w:295.7, h:207.5},
+      {name:"XPS 13 9320/9340", w:295.7, h:207.5},
+      {name:"XPS 13 Plus 9320", w:295.3, h:199.04},
       {name:"XPS 15 9530", w:344.4, h:230.1},
+      {name:"XPS 17 9730", w:374.45, h:248.1},
+      {name:"Inspiron 14 5430", w:322, h:216.4},
       {name:"Inspiron 15 3520", w:358.5, h:235.5},
+      {name:"Inspiron 15 5510", w:357.5, h:235.03},
+      {name:"Latitude 5440", w:323.68, h:216.4},
+      {name:"Vostro 15 3520", w:358.5, h:235.5},
+      {name:"G15 5530 (gaming)", w:359.5, h:264.7},
     ],
     "HP": [
       {name:"Pavilion 15", w:358.7, h:235.2},
-      {name:"EliteBook 840 G9", w:323.5, h:214.5},
+      {name:"Pavilion 14", w:322.5, h:220.8},
+      {name:"Envy 13/14", w:311.5, h:220.5},
+      {name:"EliteBook 840 G9/G10", w:323.5, h:214.5},
+      {name:"ProBook 450 G9/G10", w:358.1, h:235.1},
+      {name:"Victus 15 (gaming)", w:359.8, h:253.5},
+      {name:"Omen 16 (gaming)", w:357.6, h:263.1},
+      {name:"Spectre x360 14", w:311.7, h:220.4},
     ],
     "Asus": [
-      {name:"Vivobook 15 X1504", w:358.3, h:235.5},
+      {name:"Vivobook 15 X1504/X1502", w:358.3, h:235.5},
+      {name:"Vivobook 14 X1404", w:322.6, h:214.9},
+      {name:"Vivobook S 15", w:354.5, h:233.9},
       {name:"ZenBook 14 UX3402", w:311.9, h:220.5},
+      {name:"ZenBook 14 OLED UX3405", w:311, h:220},
+      {name:"TUF Gaming A15", w:359.8, h:256},
+      {name:"ROG Strix G16 (gaming)", w:354.9, h:264.6},
+      {name:"ROG Zephyrus G14", w:312, h:227},
+    ],
+    "Acer": [
+      {name:"Aspire 3 A315", w:363.1, h:239.6},
+      {name:"Aspire 5 A515", w:363.5, h:240.4},
+      {name:"Swift 3 SF314", w:317.9, h:225.6},
+      {name:"Swift Go 14", w:318.1, h:222.9},
+      {name:"Nitro 5 (gaming)", w:363.4, h:255.1},
+      {name:"Predator Helios Neo 16", w:355.6, h:259.5},
+    ],
+    "MSI": [
+      {name:"Modern 14", w:322.9, h:223.5},
+      {name:"Modern 15", w:357.9, h:235.9},
+      {name:"Katana 15 (gaming)", w:358.6, h:263.5},
+      {name:"Stealth 14 (gaming)", w:311.8, h:227.3},
+      {name:"Cyborg 15 (gaming)", w:359.5, h:254.5},
+    ],
+    "Samsung": [
+      {name:"Galaxy Book4 15\"", w:355.4, h:225.8},
+      {name:"Galaxy Book4 Pro 14\"", w:311.6, h:222.6},
+      {name:"Galaxy Book3 15\"", w:355.4, h:225.8},
+    ],
+    "Microsoft": [
+      {name:"Surface Laptop 5 13.5\"", w:308, h:223},
+      {name:"Surface Laptop 5 15\"", w:339.5, h:244},
+      {name:"Surface Laptop Go 3", w:278, h:206},
+      {name:"Surface Book 3 15\"", w:343, h:251},
+    ],
+    "LG": [
+      {name:"Gram 14 (2023)", w:312.7, h:213.9},
+      {name:"Gram 16 (2023)", w:356, h:246.9},
+      {name:"Gram 17 (2023)", w:380.3, h:260.2},
+    ],
+    "Huawei": [
+      {name:"MateBook D14", w:322.5, h:214.8},
+      {name:"MateBook D15", w:357.6, h:229.9},
+      {name:"MateBook X Pro", w:304, h:217},
+    ],
+    "Toshiba / Dynabook": [
+      {name:"Satellite Pro C50", w:378, h:257.4},
+      {name:"Tecra A50", w:376, h:255.4},
+    ],
+    "Razer": [
+      {name:"Blade 14 (gaming)", w:312.9, h:220.3},
+      {name:"Blade 15 (gaming)", w:355, h:235},
+    ],
+    "Gigabyte / Aorus": [
+      {name:"Aorus 15 (gaming)", w:359.9, h:262.6},
+      {name:"Aero 16 (créateur)", w:356.8, h:249.5},
+    ],
+    "Autre / Non listé": [
+      {name:"Modèle personnalisé (précisez dans la commande)", w:340, h:230},
     ],
   };
 
@@ -556,9 +642,11 @@
     DESIGNS.forEach(d=>{
       const card = document.createElement('div');
       card.className = 'card crop-frame';
+      const artClass = d.image ? 'has-photo' : (d.art||'');
+      const artStyle = d.image ? `style="background-image:url('${d.image}')"` : '';
       card.innerHTML = `
         <span class="cm-tr"></span><span class="cm-bl"></span>
-        <div class="card-art ${d.art}"></div>
+        <div class="card-art ${artClass}" ${artStyle}></div>
         <div class="card-body">
           <h3>${d.name}</h3>
           <p>${d.tag}</p>
@@ -593,7 +681,8 @@
     document.getElementById('czSub').textContent = state.design.tag;
     document.getElementById('czPc').textContent = state.model.brand + ' ' + state.model.name;
     const lid = document.getElementById('czLid');
-    lid.className = 'cz-lid ' + state.design.art;
+    lid.className = 'cz-lid ' + (state.design.image ? 'has-photo' : state.design.art);
+    lid.style.backgroundImage = state.design.image ? `url('${state.design.image}')` : '';
     lid.style.width = '280px';
     lid.style.aspectRatio = `${state.model.w} / ${state.model.h}`;
     document.getElementById('czDimW').textContent = state.model.w + ' mm';
@@ -621,6 +710,7 @@
       model: state.model.brand + ' ' + state.model.name,
       design: state.design.name,
       art: state.design.art,
+      image: state.design.image || null,
       qty: state.qty,
       unit
     });
@@ -644,7 +734,7 @@
     }
     list.innerHTML = state.cart.map((it,i)=>`
       <div class="cart-item">
-        <div class="art-thumb ${it.art}"></div>
+        <div class="art-thumb ${it.image ? 'has-photo' : it.art}" ${it.image ? `style="background-image:url('${it.image}')"` : ''}></div>
         <div class="ci-info">
           <b>${it.design}</b>
           <span>${it.model}</span><br>
